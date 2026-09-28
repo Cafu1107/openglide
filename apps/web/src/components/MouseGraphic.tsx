@@ -2,20 +2,33 @@ import type { LightingState } from '@openglide/core';
 import type { CSSProperties } from 'react';
 import './mouse.css';
 
-/** Hotspot order matches the demo driver's button labels. */
+/** Physical hotspots on the drawing, by index. */
 export const BUTTON_SPOTS = ['left', 'right', 'wheel', 'back', 'forward', 'dpi'] as const;
+
+/** Map a driver's button name ("Left", "leftClick", "Mouse 4", "Side back"…) to a hotspot index, or -1. */
+export function spotForButton(name: string): number {
+  const n = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (/left|primary|button1$|^m1$/.test(n)) return 0;
+  if (/right|secondary|button2$|^m2$/.test(n)) return 1;
+  if (/middle|wheel|scrollclick|button3$|^m3$/.test(n)) return 2;
+  if (/back|mouse4|button4$|^m4$|side1|sidelower|rear/.test(n)) return 3;
+  if (/forward|mouse5|button5$|^m5$|side2|sideupper|front/.test(n)) return 4;
+  if (/dpi|cpi/.test(n)) return 5;
+  return -1;
+}
 
 interface Props {
   lighting?: LightingState;
   selected?: number;
   onSelect?: (index: number) => void;
-  buttonCount?: number;
+  /** Hotspot indices that can be clicked. */
+  activeSpots?: number[];
   size?: number;
   className?: string;
 }
 
 /** Top-down vector mouse. Buttons are clickable and LEDs preview lighting. */
-export function MouseGraphic({ lighting, selected, onSelect, buttonCount = 0, size = 220, className = '' }: Props) {
+export function MouseGraphic({ lighting, selected, onSelect, activeSpots = [], size = 220, className = '' }: Props) {
   const on = lighting && lighting.effect !== 'off';
   const color = lighting?.color ?? 'var(--accent)';
   const style = {
@@ -26,7 +39,7 @@ export function MouseGraphic({ lighting, selected, onSelect, buttonCount = 0, si
   } as CSSProperties;
 
   const spot = (index: number, base: string) => {
-    if (index >= buttonCount || !onSelect) return { className: base };
+    if (!activeSpots.includes(index) || !onSelect) return { className: base };
     return {
       className: `${base} hot ${selected === index ? 'sel' : ''}`,
       onClick: () => onSelect(index),

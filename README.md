@@ -118,11 +118,17 @@ npm run dev        # http://localhost:5173
 
 ## 🖱️ Supported devices
 
-| Brand | Devices | Status | Features |
-| --- | --- | :---: | --- |
-| **Logitech** | PRO X Superlight 1/2, PRO Wireless, G502 HERO / X, G305, G703, G903 and other HID++ 2.0 mice | ![beta](https://img.shields.io/badge/beta-67d8ff?style=flat-square) | DPI · polling (incl. 2–8 kHz) · battery · firmware |
-| **Any mouse** | Every USB / 2.4 GHz mouse | ![stable](https://img.shields.io/badge/stable-5dde89?style=flat-square) | Identity & HID layout for diagnostics, all hardware tests |
-| **Virtual** | Glide One demo mouse | ![stable](https://img.shields.io/badge/stable-5dde89?style=flat-square) | Everything — try the full UI without hardware |
+**40+ brands** through the [OpenMouse](https://github.com/OpenMouse-Project/mouse-protocol) protocol drivers, plus OpenGlide's own drivers:
+
+| Brands | Settings | Button remapping |
+| --- | --- | :---: |
+| Razer · Pulsar · Lamzu · VGN · G-Wolves · Attack Shark / Lingbao · MCHOSE · Incott · Dareu · K-snake · Teevolution | DPI / stages · polling · lift-off · sensor options | ✅ |
+| ATK (A9 / A9 Plus, X1, F1, R1) · Endgame Gear | DPI stages · polling up to 8 kHz · lift-off · motion sync · ripple · angle snapping · debounce · sleep | 👁 read-only |
+| Logitech · SteelSeries · Corsair · HyperX · Glorious · ASUS ROG · Keychron · Finalmouse · WLMouse · VXE · CRDRAKO · Ninjutso · VAXEE · Redragon · Fantech · Motospeed · Microsoft · Orbital · RAWM · Zaunkoenig · moddoMOUSE · WALLHACK · Delux · Ryunix · GravaStar | DPI · polling · lift-off, and more per model (lighting on Razer / SteelSeries / Glorious) | — |
+| **Any other mouse** | Identity & HID layout for diagnostics, all hardware tests | — |
+| **Virtual** Glide One demo | Everything — try the full UI without hardware | ✅ |
+
+The exact controls shown for a mouse come from its driver at connect time — OpenGlide never shows a setting the driver cannot write. The full, searchable list is on the in-app **Supported devices** page.
 
 > **Your mouse missing?** Connect it, open **Diagnostics → Copy report** and [open a device request](https://github.com/Cafu1107/openglide/issues/new?template=device_request.yml). Protocol captures from the vendor software make it even faster. Or [write the driver yourself](docs/ADDING_A_DRIVER.md) — most are under 200 lines.
 
@@ -185,7 +191,8 @@ openglide/
 - [x] Logitech HID++ 2.0 — DPI, polling rate (8060/8061), battery, firmware
 - [x] Hardware tests, driver hub, diagnostics, EN/TR, themes
 - [ ] Logitech onboard-profile editing (0x8100) and DPI stages
-- [ ] Razer, SteelSeries and Compx/PixArt-based (VGN, ATK, Lamzu…) drivers
+- [x] 40+ brands via OpenMouse protocol drivers, button remapping on 11 brand families
+- [ ] Button remapping for ATK, Endgame Gear, SteelSeries and Logitech
 - [ ] **Desktop app** (Tauri) with tray icon, per-game profiles and auto-start
 - [ ] Firmware update flow for supported brands
 
@@ -204,6 +211,8 @@ Contributions of every size are welcome — a new driver, a translation, a fixed
 ## ⚖️ Disclaimer
 
 OpenGlide is an independent community project and is not affiliated with or endorsed by any mouse manufacturer. All product names and trademarks belong to their owners. Inspired by [OpenMouse](https://openmouse.app/). HID++ knowledge thanks to the excellent [Solaar](https://github.com/pwr-Solaar/Solaar) project.
+
+Most vendor protocols come from the OpenMouse project's [`@openmouse/protocol`](https://github.com/OpenMouse-Project/mouse-protocol) package, used unmodified as an npm dependency. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## 📄 License
 

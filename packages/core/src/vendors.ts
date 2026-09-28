@@ -11,6 +11,7 @@ export const VENDORS: Record<number, string> = {
   0x045e: 'Microsoft',
   0x258a: 'SinoWealth (Glorious, Pulsar, …)',
   0x3554: 'Compx (VGN, ATK, …)',
+  0x373b: 'ATK',
   0x093a: 'PixArt',
   0x3434: 'Keychron',
   0x0c45: 'Microdia',

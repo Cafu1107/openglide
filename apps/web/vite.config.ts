@@ -6,5 +6,15 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   base: './',
   plugins: [react()],
-  build: { target: 'es2022', sourcemap: true },
+  build: {
+    target: 'es2022',
+    sourcemap: true,
+    chunkSizeWarningLimit: 900,
+    rollupOptions: {
+      output: {
+        // Vendor protocol drivers change rarely; keep them in their own cacheable chunk.
+        manualChunks: (id) => (id.includes('@openmouse/protocol') ? 'openmouse-protocol' : undefined),
+      },
+    },
+  },
 });

@@ -36,11 +36,14 @@ export interface DpiCapability {
   values?: number[];
   /** How many DPI stages the device can store (1 = single DPI value). */
   maxStages: number;
+  /** Stage count is fixed by the firmware; stages can be edited but not added or removed. */
+  fixedStageCount?: boolean;
 }
 
 export type LightingEffect = 'off' | 'static' | 'breathing' | 'spectrum' | 'wave';
 
-export type ButtonAction =
+/** Actions with built-in translations. Drivers may also use their own action names. */
+export type KnownButtonAction =
   | 'left-click'
   | 'right-click'
   | 'middle-click'
@@ -57,12 +60,15 @@ export type ButtonAction =
   | 'volume-down'
   | 'disabled';
 
+/** A known action id, or a vendor-specific action label passed through as-is. */
+export type ButtonAction = KnownButtonAction | (string & {});
+
 export interface Capabilities {
   dpi?: DpiCapability;
   /** Supported polling rates in Hz. */
   pollingRates?: number[];
-  /** Lift-off distance options in millimetres. */
-  liftOff?: number[];
+  /** Lift-off options: millimetres (number) or vendor levels such as "Low" / "Medium" / "High". */
+  liftOff?: (number | string)[];
   angleSnapping?: boolean;
   rippleControl?: boolean;
   motionSync?: boolean;
@@ -71,7 +77,12 @@ export interface Capabilities {
   /** Auto-sleep options in seconds (wireless mice). */
   sleepTimeout?: number[];
   lighting?: { effects: LightingEffect[] };
-  buttons?: { labels: string[]; actions: ButtonAction[] };
+  buttons?: {
+    labels: string[];
+    actions: ButtonAction[];
+    /** Assignments can be read but this driver cannot change them yet. */
+    readOnly?: boolean;
+  };
   profiles?: { count: number };
   battery?: boolean;
   /** Whether settings persist on the mouse after unplugging. */
@@ -93,7 +104,7 @@ export interface MouseState {
   dpiStages?: number[];
   activeStage?: number;
   pollingRate?: number;
-  liftOff?: number;
+  liftOff?: number | string;
   angleSnapping?: boolean;
   rippleControl?: boolean;
   motionSync?: boolean;
@@ -142,6 +153,8 @@ export interface Driver extends DriverMeta {
   devices: SupportedDevice[];
   /** Cheap check: can this driver talk to the given transport? */
   matches(transport: HidTransport): boolean;
+  /** Optional preference among several matching interfaces of one mouse (higher wins). */
+  score?(transport: HidTransport): number;
   /** Open and probe the device. Throws if the device does not answer. */
   open(transport: HidTransport, log: Logger): Promise<MouseDevice>;
 }

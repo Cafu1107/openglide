@@ -1,4 +1,5 @@
 import { genericDriver } from './drivers/generic';
+import { openmouseDriver } from './drivers/openmouse';
 import { logitechDriver } from './drivers/logitech';
 import type { Logger } from './log';
 import type { HidTransport } from './transport/types';
@@ -12,12 +13,15 @@ export * from './transport/webhid';
 export { DemoMouse, demoMeta, demoDevices } from './drivers/demo';
 export { logitechDriver } from './drivers/logitech';
 export { genericDriver } from './drivers/generic';
+export { openmouseDriver } from './drivers/openmouse';
 
 /**
- * Protocol drivers in priority order. The generic driver must stay last
- * because it matches everything. Add new drivers here.
+ * Protocol drivers in priority order. The OpenMouse bridge covers 40+ brands
+ * (including a fuller Logitech implementation); the built-in Logitech driver
+ * is the fallback for HID++ mice it does not claim. The generic driver must
+ * stay last because it matches everything. Add new drivers here.
  */
-export const DRIVERS: Driver[] = [logitechDriver, genericDriver];
+export const DRIVERS: Driver[] = [openmouseDriver, logitechDriver, genericDriver];
 
 /** WebHID filters covering every driver, for the browser device picker. */
 export const allFilters = (): HIDDeviceFilter[] => DRIVERS.flatMap((d) => d.filters);
@@ -29,7 +33,9 @@ export const allFilters = (): HIDDeviceFilter[] => DRIVERS.flatMap((d) => d.filt
 export async function openDevice(transports: HidTransport[], log: Logger): Promise<MouseDevice> {
   const errors: string[] = [];
   for (const driver of DRIVERS) {
-    const candidates = transports.filter((t) => driver.matches(t));
+    const candidates = transports
+      .filter((t) => driver.matches(t))
+      .sort((a, b) => (driver.score?.(b) ?? 0) - (driver.score?.(a) ?? 0));
     for (const transport of candidates) {
       try {
         return await driver.open(transport, log.child(driver.id));

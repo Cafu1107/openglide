@@ -1,4 +1,5 @@
 import { Card, Segmented, SettingRow, Slider, Switch } from '../../components/ui';
+import { DICTS, type Key } from '../../i18n';
 import { useT } from '../../lib/settings';
 import type { TabProps } from './DevicePage';
 
@@ -16,7 +17,10 @@ export function SensorTab({ entry, state, edit }: TabProps) {
             label={t('sensor.lod')}
             value={state.liftOff}
             onChange={(v) => edit({ liftOff: v })}
-            options={c.liftOff.map((mm) => ({ value: mm, label: <>{mm}<span className="unit">mm</span></> }))}
+            options={c.liftOff.map((v) => ({
+              value: v,
+              label: typeof v === 'number' ? <>{v}<span className="unit">mm</span></> : `lod.${v}` in DICTS.en ? t(`lod.${v}` as Key) : v,
+            }))}
           />
         </SettingRow>
       )}

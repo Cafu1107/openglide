@@ -1,9 +1,10 @@
 import { DRIVERS, demoDevices, demoMeta, type SupportedDevice } from '@openglide/core';
-import { Code2, MessageSquarePlus } from 'lucide-react';
+import { Code2, MessageSquarePlus, Search } from 'lucide-react';
 import { useState } from 'react';
 import { REPO_URL } from '../components/Sidebar';
 import { Card, StatusBadge } from '../components/ui';
 import { useT } from '../lib/settings';
+import './drivers.css';
 
 interface Row extends SupportedDevice {
   driver: string;
@@ -16,9 +17,12 @@ const ROWS: Row[] = [
 
 export function SupportPage() {
   const t = useT();
-  const vendors = ['all', ...new Set(ROWS.map((r) => r.vendor))];
-  const [vendor, setVendor] = useState('all');
-  const rows = ROWS.filter((r) => vendor === 'all' || r.vendor === vendor);
+  const [query, setQuery] = useState('');
+  const [remapOnly, setRemapOnly] = useState(false);
+  const q = query.trim().toLowerCase();
+  const rows = ROWS.filter(
+    (r) => (!remapOnly || r.features.includes('buttons')) && (!q || `${r.vendor} ${r.name}`.toLowerCase().includes(q)),
+  );
 
   return (
     <>
@@ -27,14 +31,20 @@ export function SupportPage() {
           <h1 className="page-title">{t('support.title')}</h1>
           <p className="page-sub">{t('support.sub')}</p>
         </div>
-        <div className="row wrap" style={{ gap: 6 }}>
-          {vendors.map((v) => (
-            <button key={v} className={`chip ${vendor === v ? 'on' : ''}`} onClick={() => setVendor(v)}>
-              {v === 'all' ? t('drivers.all') : v}
-            </button>
-          ))}
-        </div>
       </header>
+
+      <div className="row wrap between" style={{ marginBottom: 16 }}>
+        <label className="search">
+          <Search size={15} />
+          <input className="input" placeholder={t('support.search')} value={query} onChange={(e) => setQuery(e.target.value)} />
+        </label>
+        <div className="row" style={{ gap: 10 }}>
+          <span className="faint small">{t('support.count', { n: rows.length })}</span>
+          <button className={`chip ${remapOnly ? 'on' : ''}`} onClick={() => setRemapOnly((v) => !v)}>
+            {t('support.remapOnly')}
+          </button>
+        </div>
+      </div>
 
       <div className="card table-wrap">
         <table className="table">

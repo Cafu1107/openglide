@@ -53,11 +53,15 @@ npm run dev        # http://localhost:5173
 
 ## 🖱️ Desteklenen cihazlar
 
-| Marka | Cihazlar | Durum |
+**40'tan fazla marka** — [OpenMouse](https://github.com/OpenMouse-Project/mouse-protocol) protokol sürücüleri sayesinde:
+
+| Markalar | Ayarlar | Tuş atama |
 | --- | --- | :---: |
-| **Logitech** | PRO X Superlight 1/2, PRO Wireless, G502, G305, G703, G903 ve diğer HID++ 2.0 mouse'lar | Beta |
-| **Her mouse** | Tanılama bilgisi + tüm donanım testleri | Kararlı |
-| **Sanal** | Glide One demo mouse — tüm özellikler | Kararlı |
+| Razer · Pulsar · Lamzu · VGN · G-Wolves · Attack Shark · MCHOSE · Incott · Dareu · K-snake · Teevolution | DPI / kademeler · polling · lift-off · sensör | ✅ |
+| ATK (A9 / A9 Plus, X1, F1, R1) · Endgame Gear | DPI kademeleri · 8 kHz'e kadar polling · lift-off · motion sync · ripple · açı düzeltme · debounce · uyku | 👁 salt okunur |
+| Logitech · SteelSeries · Corsair · HyperX · Glorious · ASUS ROG · Keychron · Finalmouse · WLMouse · VXE · Redragon · Fantech ve diğerleri | DPI · polling · lift-off ve modele göre fazlası | — |
+| **Diğer tüm mouse'lar** | Tanılama bilgisi + tüm donanım testleri | — |
+| **Sanal** Glide One demo | Tüm özellikler | ✅ |
 
 Mouse'un listede yok mu? Bağla, **Tanılama → Raporu kopyala** de ve [cihaz isteği aç](https://github.com/Cafu1107/openglide/issues/new?template=device_request.yml).
 
@@ -67,4 +71,4 @@ Protokol kodu (`packages/core`) arayüzden tamamen ayrı yazıldı; aynı sürü
 
 ## 📄 Lisans
 
-[MIT](LICENSE) © 2026 Cafu1107 ve OpenGlide katkıcıları. Hiçbir mouse üreticisiyle bağlantılı değildir.
+[MIT](LICENSE) © 2026 Cafu1107 ve OpenGlide katkıcıları. Hiçbir mouse üreticisiyle bağlantılı değildir. Üretici protokollerinin çoğu OpenMouse projesinin `@openmouse/protocol` paketinden gelir — bkz. [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

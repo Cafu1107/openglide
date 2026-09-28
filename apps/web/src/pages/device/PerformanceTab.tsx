@@ -47,6 +47,7 @@ export function PerformanceTab({ entry, state, edit }: TabProps) {
   const stages = state.dpiStages ?? [];
   const active = Math.min(state.activeStage ?? 0, Math.max(stages.length - 1, 0));
   const multi = (dpiCap?.maxStages ?? 1) > 1;
+  const fixedCount = !!dpiCap?.fixedStageCount;
 
   const setStage = (index: number, value: number) => {
     const next = [...stages];
@@ -62,7 +63,7 @@ export function PerformanceTab({ entry, state, edit }: TabProps) {
           title={t('perf.dpi')}
           desc={t('perf.dpiDesc')}
           action={
-            <button
+            !fixedCount && <button
               className="btn sm"
               disabled={stages.length >= dpiCap.maxStages}
               onClick={() => edit({ dpiStages: [...stages, snapDpi((stages.at(-1) ?? 800) * 2, dpiCap)] })}
@@ -84,7 +85,7 @@ export function PerformanceTab({ entry, state, edit }: TabProps) {
                 </button>
                 <Slider value={Math.min(value, sliderMax)} min={dpiCap.min} max={sliderMax} step={dpiCap.step} onChange={(v) => setStage(i, snapDpi(v, dpiCap))} label={t('perf.stage', { n: i + 1 })} />
                 <DpiInput value={value} cap={dpiCap} onChange={(v) => setStage(i, v)} label={t('perf.stage', { n: i + 1 })} />
-                <button
+                {fixedCount ? <span /> : <button
                   className="btn ghost icon-btn sm"
                   aria-label={t('perf.remove')}
                   disabled={stages.length <= 1}
@@ -93,7 +94,7 @@ export function PerformanceTab({ entry, state, edit }: TabProps) {
                   }
                 >
                   <X size={14} />
-                </button>
+                </button>}
               </div>
             ))}
           </div>
