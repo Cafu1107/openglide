@@ -1,0 +1,19 @@
+.search { position: relative; display: flex; align-items: center; flex: 1; max-width: 380px; min-width: 220px; }
+.search svg { position: absolute; left: 12px; color: var(--text-faint); pointer-events: none; }
+.search .input { width: 100%; padding-left: 36px; }
+
+.driver-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+.driver-card { display: grid; gap: 14px; padding: 18px; align-content: start; transition: border-color 0.2s, transform 0.2s var(--ease); }
+.driver-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.driver-brand { font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.driver-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+
+.monogram {
+  width: 42px; height: 42px; flex: none; border-radius: 11px;
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 14px; letter-spacing: -0.02em;
+  color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 13%, var(--panel-soft));
+  border: 1px solid color-mix(in srgb, var(--brand) 30%, transparent);
+}
+:root[data-theme='light'] .monogram { color: color-mix(in srgb, var(--brand) 75%, #000); }

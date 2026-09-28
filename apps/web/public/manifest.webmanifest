@@ -1,0 +1,10 @@
+{
+  "name": "OpenGlide",
+  "short_name": "OpenGlide",
+  "description": "Open-source control panel for gaming mice.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#08090a",
+  "theme_color": "#08090a",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

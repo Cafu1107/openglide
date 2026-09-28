@@ -1,0 +1,52 @@
+.mouse-graphic {
+  --mg-top: #1c1f23;
+  --mg-bottom: #0f1113;
+  --mg-edge: #3a3f46;
+  --mg-btn: #22262b;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 24px 40px rgb(0 0 0 / 45%));
+}
+:root[data-theme='light'] .mouse-graphic {
+  --mg-top: #fbfbfc;
+  --mg-bottom: #e4e6ea;
+  --mg-edge: #c9cdd3;
+  --mg-btn: #f1f2f4;
+  filter: drop-shadow(0 24px 30px rgb(16 24 40 / 18%));
+}
+
+.mouse-graphic .body { stroke: var(--mg-edge); stroke-width: 1.5; }
+.mouse-graphic .btn-shape { fill: var(--mg-btn); stroke: var(--mg-edge); stroke-width: 1.2; transition: fill 0.15s, stroke 0.15s; }
+.mouse-graphic .wheel { fill: #0b0c0e; stroke: var(--mg-edge); stroke-width: 1.2; transition: stroke 0.15s; }
+.mouse-graphic .wheel-ribs line { stroke: #3a3f46; stroke-width: 2; stroke-linecap: round; }
+
+.mouse-graphic .hot { cursor: pointer; }
+.mouse-graphic .hot:hover { fill: var(--accent-soft); stroke: var(--accent); }
+.mouse-graphic .hot.sel { fill: color-mix(in srgb, var(--accent) 30%, var(--mg-btn)); stroke: var(--accent); stroke-width: 2; }
+.mouse-graphic .hot:focus-visible { outline: none; stroke: var(--accent); stroke-width: 2.5; }
+
+.mouse-graphic .led { opacity: var(--led-alpha); transition: opacity 0.3s; }
+.mouse-graphic .underglow { fill: var(--led); }
+.mouse-graphic .strip,
+.mouse-graphic .logo circle,
+.mouse-graphic .logo path { stroke: var(--led); }
+.mouse-graphic .strip { filter: drop-shadow(0 0 6px var(--led)); }
+.mouse-graphic .logo { filter: drop-shadow(0 0 5px var(--led)); }
+
+.mouse-graphic.fx-breathing .led { animation: mg-breathe var(--led-speed) ease-in-out infinite; }
+.mouse-graphic.fx-spectrum .led { animation: mg-hue var(--led-speed) linear infinite; }
+.mouse-graphic.fx-wave .led { animation: mg-hue calc(var(--led-speed) * 0.6) linear infinite, mg-breathe calc(var(--led-speed) * 0.6) ease-in-out infinite; }
+
+@keyframes mg-breathe {
+  0%, 100% { opacity: calc(var(--led-alpha) * 0.15); }
+  50% { opacity: var(--led-alpha); }
+}
+@keyframes mg-hue {
+  to { filter: hue-rotate(360deg) drop-shadow(0 0 6px var(--led)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mouse-graphic .led { animation: none !important; }
+}

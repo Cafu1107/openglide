@@ -1,0 +1,43 @@
+name: 🖱️ Device request
+description: Ask for support for a mouse that OpenGlide cannot configure yet
+title: "[Device] "
+labels: [device-request]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Connect the mouse in OpenGlide, open **Diagnostics → Copy report**, and paste it below.
+        Search existing requests first — a 👍 on an existing issue helps us prioritise.
+  - type: input
+    id: model
+    attributes:
+      label: Mouse model
+      placeholder: e.g. Razer Viper V3 Pro
+    validations:
+      required: true
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Connection
+      multiple: true
+      options: [Wired, 2.4 GHz receiver, Bluetooth]
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics report
+      description: From OpenGlide → Diagnostics → Copy report
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: features
+    attributes:
+      label: Settings you want to control
+      placeholder: DPI stages, polling rate, lift-off distance, …
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Can you help?
+      options:
+        - label: I can capture USB packets from the vendor software (USBPcap / Wireshark)
+        - label: I can test development builds

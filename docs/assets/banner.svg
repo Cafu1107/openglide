@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" fill="none">
+  <defs>
+    <radialGradient id="glowA" cx="0.78" cy="0.45" r="0.5">
+      <stop offset="0" stop-color="#5dde89" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#5dde89" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.08" cy="1" r="0.5">
+      <stop offset="0" stop-color="#67d8ff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#67d8ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#ffffff" fill-opacity="0.06"/>
+    </pattern>
+    <linearGradient id="title" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0.3" stop-color="#f2f3f5"/>
+      <stop offset="1" stop-color="#9a9fa8"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c1f23"/>
+      <stop offset="1" stop-color="#0f1113"/>
+    </linearGradient>
+    <linearGradient id="spectrum" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff6b6b"/>
+      <stop offset="0.25" stop-color="#ffb454"/>
+      <stop offset="0.5" stop-color="#5dde89"/>
+      <stop offset="0.75" stop-color="#67d8ff"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+      <animateTransform attributeName="gradientTransform" type="translate" values="-1 0; 1 0; -1 0" dur="8s" repeatCount="indefinite"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+    <clipPath id="round"><rect width="1280" height="420" rx="24"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#round)">
+    <rect width="1280" height="420" fill="#08090a"/>
+    <rect width="1280" height="420" fill="url(#dots)"/>
+    <rect width="1280" height="420" fill="url(#glowA)"/>
+    <rect width="1280" height="420" fill="url(#glowB)"/>
+
+    <!-- orbit rings -->
+    <g transform="translate(990 210)" stroke="#343940">
+      <circle r="170" stroke-dasharray="4 8">
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="80s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="125" stroke="#24282d"/>
+    </g>
+
+    <!-- mouse -->
+    <g transform="translate(905 58) rotate(-8 85 150)">
+      <animateTransform attributeName="transform" type="translate" additive="sum" values="0 0; 0 -10; 0 0" dur="6s" repeatCount="indefinite"/>
+      <ellipse cx="85" cy="268" rx="70" ry="11" fill="url(#spectrum)" filter="url(#blur)" opacity="0.8"/>
+      <path d="M85 8C128 8 152 40 153 94L155 188C157 240 128 262 85 262C42 262 13 240 15 188L17 94C19 40 42 8 85 8Z" fill="url(#body)" stroke="#3a3f46" stroke-width="1.5"/>
+      <path d="M83 10C46 12 21 43 19 90L18 110Q51 119 83 120Z" fill="#22262b" stroke="#3a3f46"/>
+      <path d="M87 10C124 12 149 43 151 90L152 110Q119 119 87 120Z" fill="#22262b" stroke="#3a3f46"/>
+      <rect x="76" y="32" width="18" height="42" rx="9" fill="#0b0c0e" stroke="#3a3f46"/>
+      <rect x="79" y="82" width="12" height="17" rx="5" fill="#22262b" stroke="#3a3f46"/>
+      <rect x="10" y="124" width="10" height="29" rx="4.5" fill="#22262b" stroke="#3a3f46"/>
+      <rect x="10" y="158" width="10" height="29" rx="4.5" fill="#22262b" stroke="#3a3f46"/>
+      <path d="M34 222C51 248 119 248 136 222" stroke="url(#spectrum)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M34 222C51 248 119 248 136 222" stroke="url(#spectrum)" stroke-width="6" stroke-linecap="round" filter="url(#soft)" opacity="0.7"/>
+      <g transform="translate(85 188)" stroke="#5dde89" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <circle r="15"><animate attributeName="stroke-opacity" values="1;0.35;1" dur="3s" repeatCount="indefinite"/></circle>
+        <path d="M-5 5L0 -7L5 5"/>
+      </g>
+    </g>
+
+    <!-- floating chips -->
+    <g font-family="JetBrains Mono, Consolas, monospace" font-size="15" fill="#f2f3f5">
+      <g>
+        <animateTransform attributeName="transform" type="translate" values="0 0; 0 -8; 0 0" dur="5s" repeatCount="indefinite"/>
+        <rect x="812" y="92" width="122" height="34" rx="9" fill="#16181b" stroke="#343940"/>
+        <circle cx="830" cy="109" r="4" fill="#5dde89"/>
+        <text x="842" y="114">1600 DPI</text>
+      </g>
+      <g>
+        <animateTransform attributeName="transform" type="translate" values="0 -6; 0 4; 0 -6" dur="5.5s" repeatCount="indefinite"/>
+        <rect x="1100" y="180" width="112" height="34" rx="9" fill="#16181b" stroke="#343940"/>
+        <circle cx="1118" cy="197" r="4" fill="#5dde89"/>
+        <text x="1130" y="202">8000 Hz</text>
+      </g>
+      <g>
+        <animateTransform attributeName="transform" type="translate" values="0 4; 0 -6; 0 4" dur="6s" repeatCount="indefinite"/>
+        <rect x="840" y="300" width="136" height="34" rx="9" fill="#16181b" stroke="#343940"/>
+        <circle cx="858" cy="317" r="4" fill="#5dde89"/>
+        <text x="870" y="322">LOD 0.7 mm</text>
+      </g>
+    </g>
+
+    <!-- copy -->
+    <g font-family="DM Sans, Segoe UI, Helvetica, Arial, sans-serif">
+      <rect x="72" y="96" width="46" height="46" rx="13" fill="#5dde89"/>
+      <path d="M88 108l17 8.5-7.5 2.2-2.2 7.5z" fill="#07160e" stroke="#07160e" stroke-width="2.4" stroke-linejoin="round"/>
+      <text x="134" y="130" font-size="30" font-weight="700" fill="#f2f3f5" letter-spacing="-0.5">OpenGlide</text>
+      <text x="72" y="214" font-size="52" font-weight="700" fill="url(#title)" letter-spacing="-1.8">One control panel for</text>
+      <text x="72" y="274" font-size="52" font-weight="700" fill="url(#title)" letter-spacing="-1.8">every gaming mouse.</text>
+      <text x="72" y="324" font-size="19" fill="#a3a8b0">DPI · polling rate · sensor · buttons · RGB — right in your browser.</text>
+      <g font-family="JetBrains Mono, Consolas, monospace" font-size="13" font-weight="500">
+        <rect x="72" y="350" width="118" height="28" rx="14" fill="#5dde89" fill-opacity="0.14"/>
+        <text x="90" y="369" fill="#5dde89">OPEN SOURCE</text>
+        <rect x="200" y="350" width="84" height="28" rx="14" fill="#67d8ff" fill-opacity="0.12"/>
+        <text x="218" y="369" fill="#67d8ff">WEBHID</text>
+        <rect x="294" y="350" width="110" height="28" rx="14" fill="#a78bfa" fill-opacity="0.14"/>
+        <text x="312" y="369" fill="#a78bfa">NO INSTALL</text>
+      </g>
+    </g>
+  </g>
+  <rect x="0.5" y="0.5" width="1279" height="419" rx="23.5" stroke="#24282d"/>
+</svg>

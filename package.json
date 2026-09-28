@@ -1,0 +1,21 @@
+{
+  "name": "openglide",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Open-source, browser-based control panel for gaming mice. Change DPI, polling rate and sensor settings with WebHID — no vendor bloatware.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @openglide/web",
+    "build": "npm run build -w @openglide/web",
+    "preview": "npm run preview -w @openglide/web",
+    "typecheck": "npm run typecheck -w @openglide/core && npm run typecheck -w @openglide/web",
+    "test": "npm run test -w @openglide/core"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
