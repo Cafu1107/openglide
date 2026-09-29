@@ -13,6 +13,7 @@ Change DPI, polling rate and sensor settings with WebHID — no vendor bloatware
 [![Live demo](https://img.shields.io/badge/▶_live_demo-cafu1107.github.io%2Fopenglide-5dde89?style=for-the-badge&labelColor=0d0f11)](https://cafu1107.github.io/openglide/)
 
 [![CI](https://img.shields.io/github/actions/workflow/status/Cafu1107/openglide/ci.yml?branch=main&style=flat-square&label=CI&labelColor=0d0f11)](https://github.com/Cafu1107/openglide/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/Cafu1107/openglide?style=flat-square&labelColor=0d0f11&color=5dde89)](https://github.com/Cafu1107/openglide/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-a78bfa?style=flat-square&labelColor=0d0f11)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-67d8ff?style=flat-square&logo=typescript&logoColor=white&labelColor=0d0f11)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18-67d8ff?style=flat-square&logo=react&logoColor=white&labelColor=0d0f11)](https://react.dev/)
